@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌱 Botanica Research Team</title>
+<meta name="description" content="Botanica Research Team — উদ্ভিদ বিজ্ঞান, টেকসই কৃষি, পরিবেশ সংরক্ষণ ও জৈবপ্রযুক্তি নিয়ে গবেষণা।">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Font Awesome CDN (এটা <head> এর মধ্যে রাখবেন) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --brand:#0c9b7a; --brand-dark:#064e3b; --accent:#ffca28;
+  --light:#f4f4f4; --dark:#0b0f14;
+  --card: rgba(255,255,255,0.08);
+  --card-strong: rgba(255,255,255,0.18);
+}
+
+/* Reset */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{scroll-behavior:smooth;font-family:'Noto Sans Bengali','Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+body{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;line-height:1.65;transition:background .3s,color .3s}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block;}
+
+/* ===== Navbar ===== */
+nav{
+  position:fixed;top:0;left:0;bottom:0;
+  width:260px; max-width:80%; background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);
+  padding:20px; display:flex;flex-direction:column;gap:16px;
+  transform:translateX(-100%); transition:transform .35s ease-in-out; z-index:1000;
+}
+nav.open{transform:translateX(0);}
+nav .logo{font-weight:800;font-size:1.3rem;color:var(--accent);margin-bottom:16px;}
+#nav-links{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1;}
+#nav-links a,.icon-btn{padding:10px 12px;border-radius:8px;transition:.25s;background:transparent;color:#fff;}
+#nav-links a:hover,.icon-btn:hover{background:var(--accent);color:#111}
+.nav-toggle-btn{position:fixed;top:18px;left:18px;font-size:1.5rem;color:#fff;cursor:pointer;z-index:1100;}
+.nav-toggle-btn:hover{color:var(--accent);}
+.social-nav{display:flex;gap:12px;margin-top:auto;}
+
+/* ===== Light/Dark Toggle ===== */
+#mode-toggle{margin-top:20px;padding:10px;border:none;border-radius:8px;cursor:pointer;background:var(--accent);color:#111;transition:.3s;font-weight:700;}
+#mode-toggle:hover{opacity:.85}
+
+/* ===== Main Content ===== */
+main{margin-left:0;transition:margin-left .35s ease-in-out;padding:80px 20px;}
+nav.open ~ main{margin-left:260px}
+
+/* ===== HERO ===== */
+header.hero{
+  height:90vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background: linear-gradient(120deg, rgba(12,155,122,0.78), rgba(44,83,100,0.82)),
+  url('https://images.unsplash.com/photo-1524594157361-0d27bb1c4f46?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  animation:fadeIn 1.2s ease-out;
+  color:#fff;
+  position:relative;
+}
+.hero h1{font-size:2.8rem;margin-bottom:12px}
+.hero p{font-size:1.2rem;opacity:.9;margin-bottom:20px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.hero .cta a{padding:12px 20px;border-radius:10px;font-weight:700;transition:.3s}
+.hero .cta a:first-child{background:var(--accent);color:#111;}
+.hero .cta a:last-child{background:transparent;color:#fff;border:2px solid #fff;}
+.hero .cta a:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 5px 15px rgba(0,0,0,0.3);opacity:.95;}
+.hero-social{display:flex;justify-content:center;gap:14px;margin-top:20px}
+.hero-social a{font-size:1.4rem;transition:.25s}
+.hero-social a:hover{color:var(--accent);transform:translateY(-2px)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+  <!-- আমাদের টিম মেম্বারস -->
+<section id="team-section">
+  <h2 style="text-align:center; margin-bottom:15px; color:white;">আমাদের টিম মেম্বারস</h2>
+
+  <!-- ফর্ম -->
+  <form id="memberForm">
+    <input type="text" id="name" placeholder="নাম লিখুন" required>
+    <input type="email" id="email" placeholder="ইমেইল লিখুন" required>
+    <input type="text" id="role" placeholder="পদবি (Role)">
+    <textarea id="bio" placeholder="সংক্ষিপ্ত বায়ো"></textarea>
+    <input type="file" id="photo" accept="image/*">
+   
+
+/* ===== Sections ===== */
+section{padding:70px 0;max-width:1200px;margin:auto}
+section h2{text-align:center;margin-bottom:28px;font-size:2rem}
+.lead{text-align:center;opacity:.9;max-width:800px;margin:0 auto 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+
+/* ===== Cards ===== */
+.card{background:var(--card);border-radius:14px;padding:18px;transition:transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;border:1px solid rgba(255,255,255,.08);}
+.card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 15px 30px rgba(0,0,0,0.4);background:var(--card-strong);}
+.card h3{margin-bottom:10px}
+
+/* ===== Members ===== */
+#member-slider{display:flex;overflow-x:auto;gap:16px;padding:10px 2px;scroll-behavior:smooth}
+.member-card{min-width:240px;transition:transform .3s}
+.member-card:hover{transform:scale(1.08);box-shadow:0 10px 20px rgba(0,0,0,0.35);}
+.member-card .btns{display:flex;gap:8px;margin-top:10px}
+.member-card button{padding:6px 10px;border:none;border-radius:8px;cursor:pointer;font-weight:600}
+.member-card .edit{background:#4caf50;color:#fff}
+.member-card .delete{background:#f44336;color:#fff}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:18px}
+.stat{background:var(--card);border:1px solid rgba(255,255,255,.08);padding:20px;border-radius:12px;text-align:center}
+.stat .num{font-size:1.8rem;font-weight:800;color:var(--accent)}
+
+/* FAQ */
+.faq-item{margin-bottom:12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;background:rgba(0,0,0,.25)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer}
+.faq-a{max-height:0;padding:0 16px;opacity:0;overflow:hidden;transition:max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease}
+.faq-item.active .faq-a{max-height:500px;opacity:1;padding:14px 16px}
+
+/* Floating WhatsApp */
+#whatsapp-float{position:fixed;bottom:18px;right:18px;background:#25d366;color:#fff;padding:16px;border-radius:50%;font-size:1.5rem;box-shadow:0 6px 18px rgba(0,0,0,.35);z-index:1100;transition:.25s}
+#whatsapp-float:hover{transform:scale(1.12)}
+
+/* Back to top */
+#toTop{position:fixed;bottom:18px;left:18px;background:rgba(0,0,0,.6);color:#fff;padding:12px 14px;border-radius:999px;font-weight:700;border:1px solid rgba(255,255,255,.2);cursor:pointer;display:none}
+
+/* Light Mode */
+body.light{background:#f4f7fb;color:#111}
+body.light .card,body.light #calculator,body.light .faq-item{background:#fff;color:#111;border-color:rgba(0,0,0,.08)}
+body.light nav{background:rgba(255,255,255,.9)}
+body.light footer{background:#f0f3f7;color:#222}
+
+/* Responsive adjustments */
+@media(max-width:900px){
+  nav{width:220px}
+  nav.open ~ main{margin-left:220px}
+}
+@media(max-width:600px){
+  nav{position:fixed;top:0;left:0;width:80%;max-width:260px}
+  nav.open ~ main{margin-left:0}
+}
+</style>
+</head>
+<body>
+  <!-- ===== HERO ===== -->
+<header class="hero">
+  <h2 style="font-size:1.2rem;opacity:0.8;margin-bottom:8px;">Welcome to</h2>
+  <h1>Botanica Research Team</h1>
+  <h2>প্রকৃতি ও উদ্ভাবনের মিলনস্থল</h2>
+  <p>উদ্ভিদ জিনোম, টেকসই কৃষি ও পরিবেশ সংরক্ষণে আমাদের গবেষণা।</p>
+  <div class="cta">
+    <a href="#research">🔬 Explore Research</a>
+    <a href="#contact">📩 Contact Us</a>
+  </div>
+  <div class="hero-social">
+    <a href="https://wa.me/8801700000000" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+  </div>
+</header>
+
+<!-- ===== NAVBAR ===== -->
+<i class="fas fa-bars nav-toggle-btn" id="menu-toggle" aria-label="Toggle menu"></i>
+<nav id="sidebar">
+  <div class="logo">🌱 Botanica Research Team</div>
+  <ul id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#members">Members</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="social-nav">
+    <a class="icon-btn" href="https://wa.me/8801700000000" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a class="icon-btn" href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a class="icon-btn" href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a class="icon-btn" href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <a class="icon-btn" href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+  </div>
+  <button id="mode-toggle">🌙 Dark/Light Mode</button>
+</nav>
+
+<main>
+  <!-- ===== MEMBERS ===== -->
+ <!-- আমাদের টিম মেম্বারস -->
+<section id="team-section">
+  <h2 style="text-align:center; margin-bottom:15px; color:white;">আমাদের টিম মেম্বারস</h2>
+
+  <!-- মেম্বার লিস্ট উপরে -->
+  <div id="teamList"></div>
+
+  <!-- ফর্ম নিচে -->
+  <form id="memberForm">
+    <input type="text" id="name" placeholder="নাম লিখুন" required>
+    <input type="email" id="email" placeholder="ইমেইল লিখুন" required>
+    <input type="text" id="role" placeholder="পদবি (Role)">
+    <textarea id="bio" placeholder="সংক্ষিপ্ত বায়ো"></textarea>
+    <input type="url" id="facebook" placeholder="Facebook লিঙ্ক">
+    <input type="url" id="linkedin" placeholder="LinkedIn লিঙ্ক">
+    <input type="url" id="github" placeholder="GitHub লিঙ্ক">
+    <input type="file" id="photo" accept="image/*">
+    <button type="submit">➕ নতুন মেম্বার যোগ করুন</button>
+  </form>
+</section>
+
+<style>
+  #team-section {
+    padding: 20px;
+    background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+    border-radius: 12px;
+    margin: 20px auto;
+    max-width: 900px;
+  }
+  #memberForm {
+    background: #ffffff22;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  #memberForm input, #memberForm textarea, #memberForm button {
+    width: 95%;
+    margin: 5px 0;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+  }
+  #memberForm button {
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  #memberForm button:hover { background: #45a049; }
+
+  #teamList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .member-card {
+    background: white;
+    color: black;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+  .member-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+  }
+  .actions {
+    margin-top: 10px;
+  }
+  .actions button {
+    margin: 3px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  .social-icons a {
+    margin: 0 5px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+</style>
+
+<!-- Font Awesome Icon CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+<script>
+let team = [];
+let editIndex = null;
+
+document.getElementById("memberForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let role = document.getElementById("role").value;
+  let bio = document.getElementById("bio").value;
+  let facebook = document.getElementById("facebook").value;
+  let linkedin = document.getElementById("linkedin").value;
+  let github = document.getElementById("github").value;
+  let photoInput = document.getElementById("photo");
+  let photo = "";
+
+  if (photoInput.files && photoInput.files[0]) {
+    let reader = new FileReader();
+    reader.onload = function(e) {
+      photo = e.target.result;
+      saveMember(name, email, role, bio, facebook, linkedin, github, photo);
+    }
+    reader.readAsDataURL(photoInput.files[0]);
+  } else {
+    saveMember(name, email, role, bio, facebook, linkedin, github, photo);
+  }
+});
+
+function saveMember(name, email, role, bio, facebook, linkedin, github, photo) {
+  if (editIndex === null) {
+    team.unshift({ name, email, role, bio, facebook, linkedin, github, photo });
+  } else {
+    team[editIndex] = { name, email, role, bio, facebook, linkedin, github, photo };
+    editIndex = null;
+    document.querySelector("#memberForm button").textContent = "➕ নতুন মেম্বার যোগ করুন";
+  }
+  renderTeam();
+  document.getElementById("memberForm").reset();
+}
+
+function renderTeam() {
+  let teamList = document.getElementById("teamList");
+  teamList.innerHTML = "";
+  team.forEach((member, index) => {
+    let card = document.createElement("div");
+    card.className = "member-card";
+    card.innerHTML = `
+      <img src="${member.photo || 'https://via.placeholder.com/80'}" alt="profile">
+      <h3>${member.name}</h3>
+      <p><b>${member.role || ""}</b></p>
+      <p>${member.email}</p>
+      <p>${member.bio}</p>
+      <div class="social-icons">
+        ${member.facebook ? `<a href="${member.facebook}" target="_blank"><i class="fab fa-facebook"></i></a>` : ""}
+        ${member.linkedin ? `<a href="${member.linkedin}" target="_blank"><i class="fab fa-linkedin"></i></a>` : ""}
+        ${member.github ? `<a href="${member.github}" target="_blank"><i class="fab fa-github"></i></a>` : ""}
+      </div>
+      <div class="actions">
+        <button onclick="editMember(${index})">✏️ এডিট</button>
+        <button onclick="deleteMember(${index})" style="background:red; color:white;">❌ ডিলিট</button>
+      </div>
+    `;
+    teamList.appendChild(card);
+  });
+}
+
+function editMember(index) {
+  let member = team[index];
+  document.getElementById("name").value = member.name;
+  document.getElementById("email").value = member.email;
+  document.getElementById("role").value = member.role;
+  document.getElementById("bio").value = member.bio;
+  document.getElementById("facebook").value = member.facebook;
+  document.getElementById("linkedin").value = member.linkedin;
+  document.getElementById("github").value = member.github;
+  editIndex = index;
+  document.querySelector("#memberForm button").textContent = "✔️ আপডেট করুন";
+}
+
+function deleteMember(index) {
+  if (confirm("আপনি কি মেম্বারটি ডিলিট করতে চান?")) {
+    team.splice(index, 1);
+    renderTeam();
+  }
+}
+</script>
+
+  <!-- ===== RESEARCH ===== -->
+  <section id="research">
+    <h2>আমাদের গবেষণা</h2>
+    <p class="lead">উদ্ভিদ বিজ্ঞান ও পরিবেশ সংরক্ষণে আমরা যে প্রজেক্টগুলো চালাচ্ছি তা এখানে তুলে ধরা হলো।</p>
+    <div class="grid">
+      <div class="card"><h3>জিনোম সিকোয়েন্সিং</h3><p>উদ্ভিদের জিনোম বিশ্লেষণ ও বংশগত বৈচিত্র্য নির্ধারণ।</p></div>
+      <div class="card"><h3>টেকসই কৃষি</h3><p>পরিবেশ বান্ধব কৃষি প্রযুক্তি এবং ন্যূনতম রাসায়নিক ব্যবহার।</p></div>
+      <div class="card"><h3>পরিবেশ সংরক্ষণ</h3><p>বনাঞ্চল ও জলবায়ু সংক্রান্ত প্রকল্প</p></div>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects">
+    <h2>প্রজেক্টস</h2>
+    <p class="lead">আমাদের চলমান এবং সমাপ্ত গবেষণা প্রজেক্টগুলো।</p>
+    <div class="grid">
+      <div class="card"><h3>বায়োফার্টিলাইজার</h3><p>জৈব সার তৈরির মাধ্যমে ফসল উৎপাদন বৃদ্ধি।</p></div>
+      <div class="card"><h3>উদ্ভিদ স্বয়ংক্রিয় চাষ</h3><p>AI ও IoT প্রযুক্তি ব্যবহার করে সঠিক চাষ প্রক্রিয়া।</p></div>
+      <div class="card"><h3>জলাশয় পুনরুদ্ধার</h3><p>পানির মান ও বাস্তুসংস্থান রক্ষা করে পরিবেশ পুনরুদ্ধার।</p></div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="gallery">
+    <h2>গ্যালারি</h2>
+    <p class="lead">আমাদের টিম ও গবেষণার চিত্রাবলী।</p>
+    <div class="grid">
+    
+      <div class="card"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=400&auto=format&fit=crop" alt="Gallery 1"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=400&auto=format&fit=crop" alt="Gallery 2"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=400&auto=format&fit=crop" alt="Gallery 3"></div>
+    </div>
+  </section>
+
+  <!-- ===== BLOG ===== -->
+  <section id="blog">
+    <h2>ব্লগ</h2>
+    <p class="lead">সাম্প্রতিক গবেষণা এবং টিপস।</p>
+    <div class="grid">
+      <div class="card"><h3>টেকসই কৃষিতে নতুন প্রযুক্তি</<div class="card"><h3>টেকসই কৃষিতে নতুন প্রযুক্তি</h3><p>পরিবেশ বান্ধব কৃষি ও উদ্ভাবনী প্রযুক্তির ব্যবহার নিয়ে বিস্তারিত আলোচনা।</p></div>
+      <div class="card"><h3>উদ্ভিদ জিনোমের রহস্য</h3><p>বিভিন্ন উদ্ভিদের জিনোম বিশ্লেষণ ও তার প্রয়োগসমূহ।</p></div>
+      <div class="card"><h3>পরিবেশ সংরক্ষণ কৌশল</h3><p>জলাশয়, বনাঞ্চল ও পরিবেশ সংরক্ষণে কার্যকর পদ্ধতি।</p></div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq">
+    <h2>প্রায়শই জিজ্ঞাসিত প্রশ্ন</h2>
+    <div class="faq-item">
+      <div class="faq-q">আমাদের গবেষণায় কিভাবে অংশ নেওয়া যায়? <span>+</span></div>
+      <div class="faq-a"><p>যোগাযোগ ফর্ম পূরণ করুন অথবা আমাদের ইমেইল/সোশ্যাল মিডিয়ার মাধ্যমে সরাসরি যোগাযোগ করুন।</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">টিমে যুক্ত হওয়ার শর্ত কি? <span>+</span></div>
+      <div class="faq-a"><p>সংশ্লিষ্ট শিক্ষাগত যোগ্যতা ও আগ্রহ থাকা প্রয়োজন। বিস্তারিত জানতে যোগাযোগ করুন।</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">গবেষণা রিপোর্ট কোথায় পাব? <span>+</span></div>
+      <div class="faq-a"><p>আমাদের ব্লগ এবং গ্যালারি সেকশনে প্রকাশিত রিপোর্টগুলো পাওয়া যাবে।</p></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+      <section id="contact" style="padding:60px 20px; background:#214b57;">
+  <div class="contact-card">
+    
+    <h2>যোগাযোগ করুন</h2>
+    <p>আপনার প্রশ্ন, প্রস্তাবনা বা সহযোগিতা পাঠান। আমরা যত দ্রুত সম্ভব উত্তর দেব।</p>
+    
+    <form id="contact-form">
+      <!-- নাম -->
+      <div class="input-box">
+        <i class="fa fa-user"></i>
+        <input type="text" name="user_name" required>
+        <label>আপনার নাম</label>
+      </div>
+
+      <!-- ইমেইল -->
+      <div class="input-box">
+        <i class="fa fa-envelope"></i>
+        <input type="email" name="user_email" required>
+        <label>ইমেইল</label>
+      </div>
+
+      <!-- বার্তা -->
+      <div class="input-box">
+        <i class="fa fa-comment"></i>
+        <textarea name="message" rows="5" required></textarea>
+        <label>আপনার বার্তা</label>
+      </div>
+
+      <!-- পাঠান বাটন -->
+      <button type="submit" class="btn-send">📨 পাঠান</button>
+    </form>
+
+    <p id="status"></p>
+  </div>
+</section>
+
+<!-- Font Awesome (আইকনের জন্য) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+  /* Contact Card */
+  .contact-card {
+    max-width: 500px;
+    margin: auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  .contact-card h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #004d40;
+    font-size: 28px;
+    font-weight:700;
+  }
+  .contact-card p {
+    text-align:center;
+    color: #555;
+    margin-bottom:30px;
+    font-size:15px;
+  }
+
+  /* Input Box */
+  .input-box {
+    position: relative;
+    margin-bottom: 25px;
+  }
+  .input-box i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #00796b;
+    font-size: 18px;
+  }
+  .input-box input,
+  .input-box textarea {
+    width: 100%;
+    padding: 14px 14px 14px 45px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
+    transition: 0.3s;
+    background: #fff;
+    color: #333;
+  }
+  .input-box input:focus,
+  .input-box textarea:focus {
+    border-color: #00796b;
+    box-shadow: 0 0 8px rgba(0,121,107,0.2);
+  }
+  .input-box label {
+    position: absolute;
+    left: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: 0.3s;
+    background: #fff;
+    padding: 0 5px;
+  }
+  .input-box input:focus ~ label,
+  .input-box input:valid ~ label,
+  .input-box textarea:focus ~ label,
+  .input-box textarea:valid ~ label {
+    top: -10px;
+    font-size: 12px;
+    color: #00796b;
+  }
+
+  /* Send Button */
+  .btn-send {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#00796b,#004d40);
+    color: #fff;
+    font-size: 16px;
+    font-weight:600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .btn-send:hover {
+    background: linear-gradient(135deg,#009688,#00695c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Status Message */
+  #status {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 15px;
+    transition: 0.3s;
+  }
+
+  /* Dark Mode Support */
+  @media (prefers-color-scheme: dark) {
+    section#contact {
+      background: #1a3337;
+    }
+    .contact-card {
+      background: #263238;
+      color: #eee;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .input-box input,
+    .input-box textarea {
+      background: #37474f;
+      color: #eee;
+      border: 1px solid #555;
+    }
+    .input-box input:focus,
+    .input-box textarea:focus {
+      border-color: #00bfa5;
+      box-shadow: 0 0 8px rgba(0,191,165,0.3);
+    }
+    .input-box label {
+      background: #263238;
+      color: #ccc;
+    }
+    .btn-send {
+      background: linear-gradient(135deg,#00bfa5,#00796b);
+    }
+    .btn-send:hover {
+      background: linear-gradient(135deg,#26a69a,#004d40);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .input-box input,
+    .input-box textarea {
+      padding-left: 40px;
+    }
+    .input-box i {
+      left: 12px;
+    }
+    .input-box label {
+      left: 40px;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('status');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // শুধু Frontend Demo জন্য
+    // বাস্তবে এখানে EmailJS বা Server API ব্যবহার করা উচিত
+    const name = form.user_name.value.trim();
+    const email = form.user_email.value.trim();
+    const message = form.message.value.trim();
+
+    if(name && email && message){
+      status.style.color = '#2e7d32';
+      status.textContent = "✅ আপনার বার্তা সফলভাবে পাঠানো হয়েছে!";
+      form.reset();
+    } else {
+      status.style.color = '#d32f2f';
+      status.textContent = "❌ দুঃখিত, দয়া করে সব ফিল্ড পূরণ করুন।";
+    }
+  });
+</script>
+      
+      <!-- ===== FOOTER ===== -->
+<footer style="padding:40px 20px;text-align:center;background:linear-gradient(135deg,#0c9b7a,#064e3b);color:#fff;margin-top:50px;border-top:4px solid var(--accent);">
+  <footer style="background: linear-gradient(135deg,#004d40,#00796b); color:#fff; padding:40px 20px; text-align:center; border-radius:12px 12px 0 0; box-shadow:0 -2px 15px rgba(0,0,0,0.3);">
+    
+    <nav style="margin-bottom:15px;">
+        <a href="#" style="color:#fff; margin:0 10px; text-decoration:none; font-weight:500; transition:0.3s;">About</a> |
+        <a href="#" style="color:#fff; margin:0 10px; text-decoration:none; font-weight:500; transition:0.3s;">Members</a> |
+        <a href="#" style="color:#fff; margin:0 10px; text-decoration:none; font-weight:500; transition:0.3s;">Research</a> |
+        <a href="#" style="color:#fff; margin:0 10px; text-decoration:none; font-weight:500; transition:0.3s;">Projects</a> |
+        <a href="#" style="color:#fff; margin:0 10px; text-decoration:none; font-weight:500; transition:0.3s;">Gallery</a> |
+        <a href="#" style="color:#fff; margin:0 10px; text-decoration:none; font-weight:500; transition:0.3s;">Blog</a> |
+        <a href="#" style="color:#fff; margin:0 10px; text-decoration:none; font-weight:500; transition:0.3s;">Contact</a>
+    </nav>
+
+    <div style="margin:20px 0;">
+        <a href="#"><i class="fab fa-facebook-f" style="background:#3b5998; color:#fff; padding:12px; border-radius:50%; margin:5px; transition:0.3s;"></i></a>
+        <a href="#"><i class="fab fa-instagram" style="background:#e4405f; color:#fff; padding:12px; border-radius:50%; margin:5px;"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in" style="background:#0077b5; color:#fff; padding:12px; border-radius:50%; margin:5px;"></i></a>
+        <a href="#"><i class="fab fa-youtube" style="background:#ff0000; color:#fff; padding:12px; border-radius:50%; margin:5px;"></i></a>
+        <a href="#"><i class="fab fa-whatsapp" style="background:#25d366; color:#fff; padding:12px; border-radius:50%; margin:5px;"></i></a>
+    </div>
+
+    <p style="font-size:14px; margin-top:20px;">
+        © 2025 <b>Botanica Research Team</b>. সকল অধিকার সংরক্ষিত। <br>
+        কোন অংশ অনুমতি ছাড়া ব্যবহার করা যাবে না।
+    </p>
+    <p style="font-size:13px; color:#cfd8dc; font-style:italic;">
+        Designed & Developed by <span style="color:#80deea;">itxpertproma</span>
+    </p>
+</footer>
+
+<!-- Font Awesome Icon CDN যোগ করতে হবে -->
+<script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+  
+<script>
+// ===== NAV TOGGLE =====
+const menuToggle = document.getElementById('menu-toggle');
+const sidebar = document.getElementById('sidebar');
+menuToggle.addEventListener('click', ()=> sidebar.classList.toggle('open'));
+
+// ===== DARK/LIGHT MODE =====
+const modeToggle = document.getElementById('mode-toggle');
+modeToggle.addEventListener('click', ()=>{
+  document.body.classList.toggle('light');
+});
+
+// ===== FAQ TOGGLE =====
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click', ()=>{
+    item.classList.toggle('active');
+  });
+});
+
+// ===== BACK TO TOP =====
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY > 400) toTop.style.display='block';
+  else toTop.style.display='none';
+});
+toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// ===== MEMBER MANAGEMENT =====
+const memberForm = document.getElementById('add-member');
+const memberSlider = document.getElementById('member-slider');
+const statMembers = document.getElementById('stat-members');
+let members = [];
+
+function updateMembers(){
+  memberSlider.innerHTML = '';
+  members.forEach((m,i)=>{
+    const card = document.createElement('div');
+    card.className='member-card card';
+    card.innerHTML=`
+      <h3>${m.name}</h3>
+      <p>${m.email}</p>
+      <p>${m.bio}</p>
+      <div class="btns">
+        <button class="edit">Edit</button>
+        <button class="delete">Delete</button>
+      </div>
+    `;
+    card.querySelector('.edit').addEventListener('click', ()=>{
+      const newName = prompt('নতুন নাম:', m.name);
+      const newEmail = prompt('নতুন ইমেইল:', m.email);
+      const newBio = prompt('নতুন বায়ো:', m.bio);
+      if(newName && newEmail){
+        m.name=newName; m.email=newEmail; m.bio=newBio;
+        updateMembers();
+      }
+    });
+    card.querySelector('.delete').addEventListener('click', ()=>{
+      if(confirm('মেম্বার মুছে ফেলতে চান?')){members.splice(i,1);updateMembers();}
+    });
+    memberSlider.appendChild(card);
+  });
+  statMembers.textContent = members.length;
+}
+memberForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = memberForm.name.value.trim();
+  const email = memberForm.email.value.trim();
+  const bio = memberForm.bio.value.trim();
+  if(name && email){members.push({name,email,bio});updateMembers();memberForm.reset();}
+});
+</script>
+
+</body>
+</html>
